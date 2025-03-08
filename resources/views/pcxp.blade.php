@@ -290,7 +290,7 @@
 
         <div id="menu">
             <ul>
-                <li><a href="{{ url('/') }}">Home</a></li>
+                <li><a href="{{ url('/home') }}">Home</a></li>
                 <li><a href="#">Produtos</a></li>
                 <li><a href="#">Windows XP</a></li> 
                 <li><a href="#">Windows Vista</a></li>

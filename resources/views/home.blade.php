@@ -211,12 +211,15 @@
 
         <div id="menu">
             <ul>
+        <center>
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Produtos</a></li>
                 <li><a href="#">Windows XP</a></li>
                 <li><a href="#">Windows Vista</a></li>
                 <li><a href="#">Acessórios</a></li>
                 <li><a href="#">Contato</a></li>
+                <li><a href="{{url ('/usuario')}}">Login/Cadastre-se</a></li>
+        </center>
             </ul>
         </div>
 
