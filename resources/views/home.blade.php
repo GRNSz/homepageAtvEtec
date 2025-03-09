@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechRetro 2007 - Sua loja de PCs Windows XP e Vista!</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="https://win98icons.alexmeub.com/icons/png/computer_2-4.png" type="image/png">
     <script>
         window.addEventListener('DOMContentLoaded', function() {
             var audio = new Audio('https://www.winhistory.de/more/winstart/mp3/vista.mp3');
