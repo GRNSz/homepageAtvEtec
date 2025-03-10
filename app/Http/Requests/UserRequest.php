@@ -6,52 +6,30 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UserRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
-    public function authorize(): bool 
-    { 
-        return true; 
-    } 
- 
-    public function rules(): array 
-    { 
- 
-        $userId = $this->route('user'); 
- 
-        return [ 
-            'name' => 'required', 
-            'email' => 'required|email|unique:users,email,' . ($userId ? 
-$userId->id : null), 
-            'password' => 'required|min:6', 
-        ];
+    public function authorize(): bool
+    {
+        return true; // Se você não estiver implementando autorização personalizada
     }
 
-    public function messages(): array
+    public function rules(): array
     {
         return [
-            'name.required' => 'O campo nome é obrigatório.',
-            'email.required' => 'O campo e-mail é obrigatório.',
-            'email.email' => 'O campo e-mail deve ser um endereço de e-mail válido.',
-            'email.unique' => 'O e-mail já está cadastrado.',
-            'password.required' => 'O campo senha é obrigatório.',
-            'password.min' => 'A senha deve ter pelo menos 6 caracteres.',
+            'nome' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'senha' => 'required|min:6',
+            'confirmar_senha' => 'required|same:senha', // Garante que a confirmação de senha seja igual à senha
+            'telefone' => 'nullable|string|max:20',
+            'endereco' => 'nullable|string|max:255',
+            'cidade' => 'nullable|string|max:255',
+            'estado' => 'nullable|string|max:2',
+            'cep' => 'nullable|string|max:10',
         ];
     }
-    public function destroy(User $user) 
-{ 
- 
-    // Apagar o registro no BD 
-    $user->delete();
-     // Redirecionar o usuário, enviar a mensagem de sucesso 
-     return redirect()->route('user.index')->with('success', 'Usuário 
-     apagado com sucesso!'); 
-      
-     }
+
+    public function messages()
+    {
+        return [
+            'confirmar_senha.same' => 'As senhas não coincidem.',
+        ];
+    }
 }

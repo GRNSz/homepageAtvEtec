@@ -295,7 +295,7 @@
                 </form>
                 
                 <div class="register-link">
-                    <p>Ainda não tem uma conta? <a href="#">Cadastre-se agora!</a></p>
+                    <p>Ainda não tem uma conta? <a href="{{ url ('/cadastro') }}">Cadastre-se agora!</a></p>
                 </div>
                 
                 <div class="login-footer">
