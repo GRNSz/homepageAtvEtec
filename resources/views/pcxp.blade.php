@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PC Windows XP Professional - Dell Optiplex | TechRetro 2007</title>
+    <link rel="icon" href="https://win98icons.alexmeub.com/icons/png/computer_2-4.png" type="image/png">
     <style>
         body {
             background: #0078d7 url('https://i.imgur.com/8xT4zJL.jpg') no-repeat fixed;

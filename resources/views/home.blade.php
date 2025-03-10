@@ -10,25 +10,24 @@
         window.addEventListener('DOMContentLoaded', function() {
             var audio = new Audio('https://www.winhistory.de/more/winstart/mp3/vista.mp3');
             
-            // Create a button for better user experience (autoplay policies)
-            var audioButton = document.createElement('div');
-            audioButton.innerHTML = 'Clique aqui para a experiência sonora completa!';
-            audioButton.style.backgroundColor = '#0078d7';
-            audioButton.style.color = 'white';
-            audioButton.style.padding = '5px 10px';
-            audioButton.style.cursor = 'pointer';
-            audioButton.style.textAlign = 'center';
-            audioButton.style.marginBottom = '10px';
-            
-            // Add click event to play audio
-            audioButton.addEventListener('click', function() {
-                audio.play();
-                this.innerHTML = 'Áudio iniciado!';
-                setTimeout(() => this.style.display = 'none', 3000);
+            // Try to play automatically
+            audio.play().catch(function(error) {
+                console.log('Autoplay was prevented:', error);
+                
+                // Create a play button as fallback due to browser autoplay policies
+                var playButton = document.createElement('button');
+                playButton.innerText = 'Clique para iniciar música';
+                playButton.style.position = 'fixed';
+                playButton.style.top = '10px';
+                playButton.style.right = '10px';
+                playButton.style.zIndex = '1000';
+                playButton.style.padding = '5px 10px';
+                playButton.onclick = function() {
+                    audio.play();
+                    this.style.display = 'none';
+                };
+                document.body.appendChild(playButton);
             });
-            
-            // Insert button at the top of the body
-            document.body.insertBefore(audioButton, document.body.firstChild);
         });
     </script>
     <style>
