@@ -218,7 +218,7 @@
                 <li><a href="#">Windows Vista</a></li>
                 <li><a href="#">Acessórios</a></li>
                 <li><a href="#">Contato</a></li>
-                <li><a href="{{url ('/menudousuario')}}">Login/Cadastre-se</a></li>
+                <li><a href="{{url ('/login')}}">Login/Cadastre-se</a></li>
         </center>
             </ul>
         </div>
