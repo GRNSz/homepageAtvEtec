@@ -29,10 +29,10 @@ Route::get('/cadastro', function () {
 Route::get('/minha-conta', [UserController::class, 'edit'])->name('menudousuario');
 
 // User CRUD operations
-Route::post('/usuario', [UserController::class, 'store'])->name('user.store');
-Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
-Route::put('/users/{id}/password', [UserController::class, 'updatePassword'])->name('users.update-password');
-Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+Route::post('/user', [UserController::class, 'store'])->name('user.store');
+Route::put('/users/{id}', [UserController::class, 'update'])->name('user.update');
+Route::put('/users/{id}/password', [UserController::class, 'updatePassword'])->name('user.update-password');
+Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
 // Other product routes
 Route::get('/produtos', function () {
@@ -54,3 +54,13 @@ Route::get('/acessorios', function () {
 Route::get('/contato', function () {
     return view('contato');
 })->name('contato');
+
+
+Route::get('/meuusuario', function () {
+    return view('crud');
+})->name('crud');
+
+Route::get('/usuarios/{id}', function ($id) {
+    $usuario = User::find($id);
+    return view('usuarios.show', compact('usuario'));
+});

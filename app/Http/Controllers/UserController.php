@@ -33,6 +33,16 @@ class UserController extends Controller
             return back()->withErrors(['confirmar_senha' => 'As senhas não coincidem.']);
         }
 
+        $validated = $request->validate([
+            'nome' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,'.$id,
+            'telefone' => 'nullable|string|max:20',
+            'endereco' => 'nullable|string|max:255',
+            'cidade' => 'nullable|string|max:100',
+            'estado' => 'nullable|string|max:2',
+            'cep' => 'nullable|string|max:9',
+        ]);
+
         // Criação do usuário no banco de dados
         $user = User::create([
             'nome' => $request->nome,
@@ -119,4 +129,92 @@ class UserController extends Controller
 
         return redirect()->route('menudousuario')->with('success', 'Senha alterada com sucesso!');
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        Session::flush();
+        return redirect('/')->with('success', 'Logout realizado com sucesso!');
+    }
+    
+    public function CRUD()
+    {
+        // Retorna a view do CRUD
+        return view('crud');
+
+        // Retorna a view com todos os usuários cadastrados
+        $users = User::all();
+        return view('users.index', compact('users'));
+
+        $user = User::OrderBy('id', 'desc')->paginate(10);
+        return view('users.index', compact('crud', $user));
+
+    }
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $users = User::where('nome', 'LIKE', "%{$query}%")->get();
+        return view('users.index', compact('users'));
+    }
+    public function searchByEmail(Request $request)
+    {
+        $query = $request->input('query');
+        $users = User::where('email', 'LIKE', "%{$query}%")->get();
+        return view('users.index', compact('users'));
+    }
+    public function searchByPhone(Request $request)
+    {
+        $query = $request->input('query');
+        $users = User::where('telefone', 'LIKE', "%{$query}%")->get();
+        return view('users.index', compact('users'));
+    }
+    public function searchByAddress(Request $request)
+    {
+        $query = $request->input('query');
+        $users = User::where('endereco', 'LIKE', "%{$query}%")->get();
+        return view('users.index', compact('users'));
+    }
+    public function searchByCity(Request $request)
+    {
+        $query = $request->input('query');
+        $users = User::where('cidade', 'LIKE', "%{$query}%")->get();
+        return view('users.index', compact('users'));
+    }
+    public function searchByState(Request $request)
+    {
+        $query = $request->input('query');
+        $users = User::where('estado', 'LIKE', "%{$query}%")->get();
+        return view('users.index', compact('users'));
+    }
+    public function searchByZip(Request $request)
+    {
+        $query = $request->input('query');
+        $users = User::where('cep', 'LIKE', "%{$query}%")->get();
+        return view('users.index', compact('users'));
+    }
+    public function searchByDate(Request $request)
+    {
+        $query = $request->input('query');
+        $users = User::where('created_at', 'LIKE', "%{$query}%")->get();
+        return view('users.index', compact('users'));
+    }
+    public function searchByUpdatedAt(Request $request)
+    {
+        $query = $request->input('query');
+        $users = User::where('updated_at', 'LIKE', "%{$query}%")->get();
+        return view('users.index', compact('users'));
+    }
+    public function searchById(Request $request)
+    {
+        $query = $request->input('query');
+        $users = User::where('id', 'LIKE', "%{$query}%")->get();
+        return view('users.index', compact('users'));
+    }
+    public function searchByName(Request $request)
+    {
+        $query = $request->input('query');
+        $users = User::where('nome', 'LIKE', "%{$query}%")->get();
+        return view('users.index', compact('users'));
+    }
+
 }
